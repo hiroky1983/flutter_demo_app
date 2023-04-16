@@ -29,6 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> titleList = ['Amazon', '楽天','Yahoo',];
   int _counter = 0;
 
   void _incrementCounter() {
@@ -43,22 +44,28 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('フラッター頑張る'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: titleList.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.key),
+                title: Text(titleList[index]),
+              ),
+              const Divider(height: 0,),
+            ],
+          );
+        }
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          titleList.add('Google');
+          print(titleList);
+          setState(() {
+
+          });
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
